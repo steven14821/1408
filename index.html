@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Mejor Día del Mundo</title>
+  <style>
+    /* Estilos para la página */
+    body {
+      background-image: linear-gradient(to bottom, #f2c2c7, #ffc5c5);
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.5s ease;
+      /* Agregamos transición para el cambio de fondo */
+    }
+
+    #header {
+      text-align: center;
+      padding: 20px;
+      font-size: 64px;
+      font-weight: bold;
+      color: #ff69b4;
+      margin-bottom: 20px;
+    }
+
+    #menu {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    #menu a {
+      text-decoration: none;
+      color: #ff69b4;
+      font-size: 24px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 0 10px;
+    }
+
+    #menu a:hover {
+      background-color: #ff69b4;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #countdown {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      font-weight: bold;
+      color: #ff69b4;
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    #countdown.show {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Agregamos una clase para ocultar el menú */
+    .hide-menu {
+      display: none;
+    }
+
+    /* Estilo para el fondo blanco */
+    .white-background {
+      background-color: #fff;
+      /* Cambiamos el color de fondo a blanco */
+    }
+
+    #countdown-message {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header">
+    <h1>El Mejor Día del Mundo</h1>
+  </header>
+  <nav id="menu">
+    <a id="countdown-link">Ir a la cuenta regresiva</a>
+  </nav>
+  <div id="countdown">
+    <div id="countdown-message"></div>
+    <p id="countdown-timer"></p>
+  </div>
+
+  <script>
+    const countdownMessage = document.getElementById('countdown-message');
+    const countdownTimer = document.getElementById('countdown-timer');
+    const countdownElement = document.getElementById('countdown');
+    const countdownLink = document.getElementById('countdown-link');
+    const menuElement = document.getElementById('menu');
+    const bodyElement = document.body; // Obtenemos el elemento del cuerpo
+    const targetDate = new Date('2024-08-14T05:00:00.000-05:00'); // Fecha objetivo: 14 de agosto de 2024, 12:00 AM en Colombia
+    countdownLink.addEventListener('click', () => {
+      countdownElement.classList.add('show');
+      menuElement.classList.add('hide-menu'); // Agregamos la clase para ocultar el menú
+      bodyElement.classList.add('white-background'); // Agregamos la clase para el fondo blanco
+      countdownMessage.textContent = '¡1 AÑO!!!! 😭😭😭'; // Agregamos el texto
+      updateCountdown();
+    });
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeRemaining = targetDate - now;
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+      countdownTimer.innerHTML = `
+        <p>Faltan ${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos para el mejor día del mundo!</p>
+      `;
+      setTimeout(updateCountdown, 1000); // Actualizar cada segundo
+    }
+  </script>
+</body>
+
+</html>
